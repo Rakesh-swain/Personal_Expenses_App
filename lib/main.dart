@@ -20,7 +20,7 @@ class MyHomePage extends StatelessWidget {
     Transaction(
       id: 't1',
       title: 'New Shoes',
-      amount: 20.30,
+      amount: 20.37,
       date: DateTime.now(),
     ),
     Transaction(
@@ -55,6 +55,14 @@ class MyHomePage extends StatelessWidget {
                 return Card(
                   child: Row(children: <Widget>[
                     Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                        color: Colors.black,
+                        width: 2,
+                      )),
                       child: Text(tx.amount.toString()),
                     ),
                     Column(
