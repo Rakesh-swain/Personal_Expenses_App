@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
       ),
       // ignore: prefer_const_literals_to_create_immutables
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
@@ -49,6 +49,29 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.yellow,
                 child: Text("CHART!"),
                 elevation: 5,
+              ),
+            ),
+
+            // ignore: prefer_const_literals_to_create_immutables
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const TextField(
+                        decoration: InputDecoration(labelText: 'Title'),
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(labelText: 'Amount'),
+                      ),
+                      FlatButton(
+                        child: const Text('Add Transaction'),
+                        textColor: Colors.purple,
+                        onPressed: () {},
+                      ),
+                    ]),
               ),
             ),
             Column(
