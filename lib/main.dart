@@ -63,13 +63,26 @@ class MyHomePage extends StatelessWidget {
                         color: Colors.black,
                         width: 2,
                       )),
-                      child: Text(tx.amount.toString()),
+                      child: Text(
+                        tx.amount.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple,
+                        ),
+                      ),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(tx.title),
+                        Text(
+                          tx.title,
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
                         Text(
                           tx.date.toString(),
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       ],
                     )
