@@ -21,7 +21,7 @@ class _UserTransactionState extends State<UserTransaction> {
       title: 'Weekly Groceries',
       amount: 30.68,
       date: DateTime.now(),
-    )
+    ),
   ];
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -38,7 +38,7 @@ class _UserTransactionState extends State<UserTransaction> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        NewTransaction(),
+        NewTransaction(_addNewTransaction),
         TransactionList(_userTransaction),
       ],
     );
