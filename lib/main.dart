@@ -24,6 +24,12 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter App'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
+        ],
       ),
       // ignore: prefer_const_literals_to_create_immutables
       body: SingleChildScrollView(
@@ -42,6 +48,11 @@ class MyHomePage extends StatelessWidget {
               UserTransaction(),
               // ignore: prefer_const_literals_to_create_immutables
             ]),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }
