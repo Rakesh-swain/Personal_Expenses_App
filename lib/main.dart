@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './widgets/user_transaction.dart';
+import './widgets/transaction_list.dart';
+import './widgets/new_transaction.dart';
+import './models/transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,9 +17,49 @@ class MyApp extends StatelessWidget {
 }
 
 // ignore: use_key_in_widget_constructors
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   // late String titleInput;
-  // late String amountInput;
+  final List<Transaction> _userTransaction = [
+    Transaction(
+      id: 't1',
+      title: 'New Shoes',
+      amount: 20.37,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 30.68,
+      date: DateTime.now(),
+    ),
+  ];
+  void _addNewTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+        id: DateTime.now().toString(),
+        title: txTitle,
+        amount: txAmount,
+        date: DateTime.now());
+    setState(() {
+      _userTransaction.add(newTx);
+    });
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addNewTransaction),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +69,7 @@ class MyHomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () => _startAddNewTransaction(context),
           ),
         ],
       ),
@@ -45,14 +87,14 @@ class MyHomePage extends StatelessWidget {
                   elevation: 5,
                 ),
               ),
-              UserTransaction(),
+              TransactionList(_userTransaction),
               // ignore: prefer_const_literals_to_create_immutables
             ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _startAddNewTransaction(context),
       ),
     );
   }
