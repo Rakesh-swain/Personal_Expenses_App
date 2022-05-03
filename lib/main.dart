@@ -26,21 +26,23 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Flutter App'),
       ),
       // ignore: prefer_const_literals_to_create_immutables
-      body: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: double.infinity,
-              child: const Card(
-                color: Colors.yellow,
-                child: Text("CHART!"),
-                elevation: 5,
+      body: SingleChildScrollView(
+        child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: double.infinity,
+                child: const Card(
+                  color: Colors.yellow,
+                  child: Text("CHART!"),
+                  elevation: 5,
+                ),
               ),
-            ),
-            UserTransaction(),
-            // ignore: prefer_const_literals_to_create_immutables
-          ]),
+              UserTransaction(),
+              // ignore: prefer_const_literals_to_create_immutables
+            ]),
+      ),
     );
   }
 }
