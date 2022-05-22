@@ -110,12 +110,61 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<Widget> _buildLandScapeContent(
+    MediaQueryData mediaQuery,
+    AppBar appBar,
+    Widget txListWidget,
+  ) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Show Chart', style: Theme.of(context).textTheme.headline6),
+          Switch.adaptive(
+              activeColor: Theme.of(context).accentColor,
+              value: _showChart,
+              onChanged: (val) {
+                setState(() {
+                  _showChart = val;
+                });
+              }),
+        ],
+      ),
+      _showChart
+          ? Container(
+              height: (mediaQuery.size.height -
+                      appBar.preferredSize.height -
+                      mediaQuery.padding.top) *
+                  0.7,
+              child: Chart(_recentTransaction),
+            )
+          : txListWidget
+    ];
+  }
+
+  List<Widget> _buildPortraitContent(
+    MediaQueryData mediaQuery,
+    AppBar appBar,
+    Widget txListWidget,
+  ) {
+    return [
+      Container(
+        height: (mediaQuery.size.height -
+                appBar.preferredSize.height -
+                mediaQuery.padding.top) *
+            0.3,
+        child: Chart(_recentTransaction),
+      ),
+      txListWidget
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    final PreferredSizeWidget? appBar;
+    final appBar;
     if (Platform.isIOS) {
       appBar = CupertinoNavigationBar(
         middle: Text('Personal Expenses'),
@@ -154,41 +203,9 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if (isLandscape)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Show Chart',
-                        style: Theme.of(context).textTheme.headline6),
-                    Switch.adaptive(
-                        activeColor: Theme.of(context).accentColor,
-                        value: _showChart,
-                        onChanged: (val) {
-                          setState(() {
-                            _showChart = val;
-                          });
-                        }),
-                  ],
-                ),
+                ..._buildLandScapeContent(mediaQuery, appBar, txListWidget),
               if (!isLandscape)
-                Container(
-                  height: (mediaQuery.size.height -
-                          appBar.preferredSize.height -
-                          mediaQuery.padding.top) *
-                      0.3,
-                  child: Chart(_recentTransaction),
-                ),
-              if (!isLandscape) txListWidget,
-              if (isLandscape)
-                _showChart
-                    ? Container(
-                        height: (mediaQuery.size.height -
-                                appBar.preferredSize.height -
-                                mediaQuery.padding.top) *
-                            0.7,
-                        child: Chart(_recentTransaction),
-                      )
-                    : txListWidget
-              // ignore: prefer_const_literals_to_create_immutables
+                ..._buildPortraitContent(mediaQuery, appBar, txListWidget),
             ]),
       ),
     );
